@@ -1,5 +1,12 @@
 # PRD Manager - Product Requirements Document Management Tool
 
+[![Build Status][build-status-svg]][build-status-url]
+[![Lint Status][lint-status-svg]][lint-status-url]
+[![Go Report Card][goreport-svg]][goreport-url]
+[![Docs][docs-godoc-svg]][docs-godoc-url]
+[![Visualization][viz-svg]][viz-url]
+[![License][license-svg]][license-url]
+
 A comprehensive CLI tool for creating, managing, and validating Product Requirements Documents (PRDs). Built with Go and featuring interactive wizards, templates, validation, and multiple export formats.
 
 ![PRD Manager Demo](https://img.shields.io/badge/Go-1.21+-blue.svg)
@@ -453,3 +460,18 @@ The included demo (`go run demo.go`) showcases a complete PRD with:
 **Total Creation Time**: < 30 seconds programmatically  
 **Manual Equivalent**: 2-4 hours of traditional document creation  
 **Validation Status**: ✅ Passes all schema and business rule checks
+
+ [build-status-svg]: https://github.com/grokify/product-artifacts/actions/workflows/ci.yaml/badge.svg?branch=main
+ [build-status-url]: https://github.com/grokify/product-artifacts/actions/workflows/ci.yaml
+ [lint-status-svg]: https://github.com/grokify/product-artifacts/actions/workflows/lint.yaml/badge.svg?branch=main
+ [lint-status-url]: https://github.com/grokify/product-artifacts/actions/workflows/lint.yaml
+ [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/product-artifacts
+ [goreport-url]: https://goreportcard.com/report/github.com/grokify/product-artifacts
+ [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/grokify/product-artifacts
+ [docs-godoc-url]: https://pkg.go.dev/github.com/grokify/product-artifacts
+ [viz-svg]: https://img.shields.io/badge/visualizaton-Go-blue.svg
+ [viz-url]: https://mango-dune-07a8b7110.1.azurestaticapps.net/?repo=grokify%2Fproduct-artifacts
+ [loc-svg]: https://tokei.rs/b1/github/grokify/product-artifacts
+ [repo-url]: https://github.com/grokify/product-artifacts
+ [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
+ [license-url]: https://github.com/grokify/product-artifacts/blob/master/LICENSE
