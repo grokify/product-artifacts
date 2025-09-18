@@ -5,13 +5,10 @@
 [![Go Report Card][goreport-svg]][goreport-url]
 [![Docs][docs-godoc-svg]][docs-godoc-url]
 [![Visualization][viz-svg]][viz-url]
+![PRD Manager Demo](https://img.shields.io/badge/Go-1.21+-blue.svg)
 [![License][license-svg]][license-url]
 
 A comprehensive CLI tool for creating, managing, and validating Product Requirements Documents (PRDs). Built with Go and featuring interactive wizards, templates, validation, and multiple export formats.
-
-![PRD Manager Demo](https://img.shields.io/badge/Go-1.21+-blue.svg)
-![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 ## 🎯 Overview
 
