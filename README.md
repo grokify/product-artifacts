@@ -306,19 +306,19 @@ $ ./prd-manager list ./projects/
 ```
 product-management-artifacts/
 ├── 🚀 main.go              # CLI application entry point
-├── ⚙️  commands.go          # Command implementations  
+├── ⚙️ commands.go          # Command implementations  
 ├── 🎨 display.go           # Display and formatting logic
-├── ✏️  editors.go           # Interactive editing functions
+├── ✏️ editors.go           # Interactive editing functions
 ├── 📑 templates.go         # PRD template definitions
 ├── 📤 export.go            # Export format handlers
 ├── 🎭 demo.go              # Comprehensive demo application
-├── 📦 go.mod              # Go module definition
-├── 📖 README.md           # This documentation
-└── 📋 prd/                # PRD package
-    ├── 🏗️  prd.go          # Core PRD structs and methods
-    ├── 📐 schema.json     # JSON schema definition
-    ├── 📄 example.json    # Complete PRD example
-    └── 🧪 example_test.go # Comprehensive test suite
+├── 📦 go.mod               # Go module definition
+├── 📖 README.md            # This documentation
+└── 📋 prd/                 # PRD package
+    ├── 🏗️ prd.go           # Core PRD structs and methods
+    ├── 📐 schema.json      # JSON schema definition
+    ├── 📄 example.json     # Complete PRD example
+    └── 🧪 example_test.go  # Comprehensive test suite
 ```
 
 ## 🎯 Key Benefits
