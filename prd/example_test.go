@@ -19,7 +19,7 @@ func TestPRDMarshalUnmarshal(t *testing.T) {
 			Email: "test@example.com",
 			Team:  "Test Team",
 		},
-		Status: "draft",
+		Status:   "draft",
 		Priority: "high",
 		Overview: Overview{
 			ProblemStatement: "Test problem statement",

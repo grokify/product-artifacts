@@ -257,7 +257,7 @@ func exportToMarkdown(prdDoc *prd.PRD, filename string) error {
 	md.WriteString(fmt.Sprintf("*Document generated on %s*\n", time.Now().Format("2006-01-02 15:04")))
 
 	// Write to file
-	if err := os.WriteFile(filename, []byte(md.String()), 0644); err != nil {
+	if err := os.WriteFile(filename, []byte(md.String()), 0600); err != nil {
 		return fmt.Errorf("failed to write markdown file: %w", err)
 	}
 
@@ -364,7 +364,7 @@ func exportToHTML(prdDoc *prd.PRD, filename string) error {
 	html.WriteString("</html>\n")
 
 	// Write to file
-	if err := os.WriteFile(filename, []byte(html.String()), 0644); err != nil {
+	if err := os.WriteFile(filename, []byte(html.String()), 0600); err != nil {
 		return fmt.Errorf("failed to write HTML file: %w", err)
 	}
 

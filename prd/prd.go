@@ -55,9 +55,9 @@ type Overview struct {
 
 // Objectives contains business goals and success metrics
 type Objectives struct {
-	BusinessGoals   []string        `json:"business_goals"`
-	SuccessMetrics  []SuccessMetric `json:"success_metrics,omitempty"`
-	OKRs            []OKR           `json:"okrs,omitempty"`
+	BusinessGoals  []string        `json:"business_goals"`
+	SuccessMetrics []SuccessMetric `json:"success_metrics,omitempty"`
+	OKRs           []OKR           `json:"okrs,omitempty"`
 }
 
 // SuccessMetric represents a measurable success indicator
@@ -122,9 +122,9 @@ type TechnicalSpecifications struct {
 
 // TechnologyStack represents the technology stack
 type TechnologyStack struct {
-	Frontend      []string `json:"frontend,omitempty"`
-	Backend       []string `json:"backend,omitempty"`
-	Database      []string `json:"database,omitempty"`
+	Frontend       []string `json:"frontend,omitempty"`
+	Backend        []string `json:"backend,omitempty"`
+	Database       []string `json:"database,omitempty"`
 	Infrastructure []string `json:"infrastructure,omitempty"`
 }
 
@@ -167,9 +167,9 @@ type Risk struct {
 
 // Appendices contains supporting documents and references
 type Appendices struct {
-	ResearchData      string             `json:"research_data,omitempty"`
-	MockupsWireframes []MockupWireframe  `json:"mockups_wireframes,omitempty"`
-	RelatedDocuments  []RelatedDocument  `json:"related_documents,omitempty"`
+	ResearchData      string            `json:"research_data,omitempty"`
+	MockupsWireframes []MockupWireframe `json:"mockups_wireframes,omitempty"`
+	RelatedDocuments  []RelatedDocument `json:"related_documents,omitempty"`
 }
 
 // MockupWireframe represents a mockup or wireframe reference
@@ -208,7 +208,7 @@ func (p *PRD) SaveToFile(filename string) error {
 		return fmt.Errorf("failed to marshal PRD to JSON: %w", err)
 	}
 
-	if err := os.WriteFile(filename, data, 0644); err != nil {
+	if err := os.WriteFile(filename, data, 0600); err != nil {
 		return fmt.Errorf("failed to write file %s: %w", filename, err)
 	}
 
@@ -268,15 +268,15 @@ func (p *PRD) Validate() error {
 	if len(p.Requirements.Functional) == 0 {
 		return fmt.Errorf("at least one functional requirement is required")
 	}
-	
+
 	// Validate status enum
 	validStatuses := map[string]bool{
-		"draft":         true,
-		"review":        true,
-		"approved":      true,
+		"draft":          true,
+		"review":         true,
+		"approved":       true,
 		"in_development": true,
-		"completed":     true,
-		"archived":      true,
+		"completed":      true,
+		"archived":       true,
 	}
 	if !validStatuses[p.Status] {
 		return fmt.Errorf("invalid status: %s", p.Status)
