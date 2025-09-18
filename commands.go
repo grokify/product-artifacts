@@ -224,7 +224,7 @@ func listPRDs(dir string) error {
 			lastUpdated = prdDoc.LastUpdated.Format("2006-01-02 15:04")
 		}
 
-		table.Append([]string{
+		err = table.Append([]string{
 			filepath.Base(file),
 			prdDoc.ID,
 			truncateString(prdDoc.Title, 30),
@@ -232,11 +232,13 @@ func listPRDs(dir string) error {
 			prdDoc.Owner.Name,
 			lastUpdated,
 		})
+		if err != nil {
+			return err
+		}
 	}
 
 	fmt.Println(color.CyanString("📋 PRD Documents"))
-	table.Render()
-	return nil
+	return table.Render()
 }
 
 // View PRD content
@@ -254,7 +256,7 @@ func viewPRD(filename, format, section string) error {
 		}
 		fmt.Println(jsonStr)
 	case "table":
-		displayPRDTable(prdDoc, section)
+		return displayPRDTable(prdDoc, section)
 	default: // pretty
 		displayPRDPretty(prdDoc, section)
 	}

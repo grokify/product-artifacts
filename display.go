@@ -290,23 +290,23 @@ func displayRisks(prdDoc *prd.PRD) {
 }
 
 // Display PRD in table format
-func displayPRDTable(prdDoc *prd.PRD, section string) {
+func displayPRDTable(prdDoc *prd.PRD, section string) error {
 	switch section {
 	case "requirements":
-		displayRequirementsTable(prdDoc)
+		return displayRequirementsTable(prdDoc)
 	case "stories":
-		displayUserStoriesTable(prdDoc)
+		return displayUserStoriesTable(prdDoc)
 	case "milestones":
-		displayMilestonesTable(prdDoc)
+		return displayMilestonesTable(prdDoc)
 	default:
-		displayOverviewTable(prdDoc)
+		return displayOverviewTable(prdDoc)
 	}
 }
 
-func displayRequirementsTable(prdDoc *prd.PRD) {
+func displayRequirementsTable(prdDoc *prd.PRD) error {
 	if len(prdDoc.Requirements.Functional) == 0 {
 		fmt.Println("No functional requirements found.")
-		return
+		return nil
 	}
 
 	table := tablewriter.NewWriter(os.Stdout)
@@ -318,44 +318,50 @@ func displayRequirementsTable(prdDoc *prd.PRD) {
 			deps = "None"
 		}
 
-		table.Append([]string{
+		err := table.Append([]string{
 			req.ID,
 			truncateString(req.Description, 40),
 			req.Priority,
 			deps,
 		})
+		if err != nil {
+			return err
+		}
 	}
 
 	fmt.Println(color.CyanString("Functional Requirements"))
-	table.Render()
+	return table.Render()
 }
 
-func displayUserStoriesTable(prdDoc *prd.PRD) {
+func displayUserStoriesTable(prdDoc *prd.PRD) error {
 	if len(prdDoc.UserStories) == 0 {
 		fmt.Println("No user stories found.")
-		return
+		return nil
 	}
 
 	table := tablewriter.NewWriter(os.Stdout)
 	table.Header("ID", "Story", "Priority", "Estimate")
 
 	for _, story := range prdDoc.UserStories {
-		table.Append([]string{
+		err := table.Append([]string{
 			story.ID,
 			truncateString(story.Story, 35),
 			story.Priority,
 			story.EffortEstimate,
 		})
+		if err != nil {
+			return err
+		}
 	}
 
 	fmt.Println(color.CyanString("User Stories"))
-	table.Render()
+	return table.Render()
 }
 
-func displayMilestonesTable(prdDoc *prd.PRD) {
+func displayMilestonesTable(prdDoc *prd.PRD) error {
 	if prdDoc.Timeline == nil || len(prdDoc.Timeline.Milestones) == 0 {
 		fmt.Println("No milestones found.")
-		return
+		return nil
 	}
 
 	table := tablewriter.NewWriter(os.Stdout)
@@ -367,36 +373,55 @@ func displayMilestonesTable(prdDoc *prd.PRD) {
 			deps = "None"
 		}
 
-		table.Append([]string{
+		err := table.Append([]string{
 			milestone.Name,
 			milestone.TargetDate,
 			truncateString(milestone.Description, 25),
 			deps,
 		})
+		if err != nil {
+			return err
+		}
 	}
 
 	fmt.Println(color.CyanString("Project Milestones"))
-	table.Render()
+	return table.Render()
 }
 
-func displayOverviewTable(prdDoc *prd.PRD) {
+func displayOverviewTable(prdDoc *prd.PRD) error {
 	table := tablewriter.NewWriter(os.Stdout)
 	table.Header("Field", "Value")
 
-	table.Append([]string{"ID", prdDoc.ID})
-	table.Append([]string{"Title", prdDoc.Title})
-	table.Append([]string{"Version", prdDoc.Version})
-	table.Append([]string{"Status", prdDoc.Status})
-	table.Append([]string{"Priority", prdDoc.Priority})
-	table.Append([]string{"Owner", fmt.Sprintf("%s (%s)", prdDoc.Owner.Name, prdDoc.Owner.Email)})
-	table.Append([]string{"Created", prdDoc.CreatedDate})
+	if err := table.Append([]string{"ID", prdDoc.ID}); err != nil {
+		return err
+	}
+	if err := table.Append([]string{"Title", prdDoc.Title}); err != nil {
+		return err
+	}
+	if err := table.Append([]string{"Version", prdDoc.Version}); err != nil {
+		return err
+	}
+	if err := table.Append([]string{"Status", prdDoc.Status}); err != nil {
+		return err
+	}
+	if err := table.Append([]string{"Priority", prdDoc.Priority}); err != nil {
+		return err
+	}
+	if err := table.Append([]string{"Owner", fmt.Sprintf("%s (%s)", prdDoc.Owner.Name, prdDoc.Owner.Email)}); err != nil {
+		return err
+	}
+	if err := table.Append([]string{"Created", prdDoc.CreatedDate}); err != nil {
+		return err
+	}
 
 	if prdDoc.LastUpdated != nil {
-		table.Append([]string{"Last Updated", prdDoc.LastUpdated.Format("2006-01-02 15:04")})
+		if err := table.Append([]string{"Last Updated", prdDoc.LastUpdated.Format("2006-01-02 15:04")}); err != nil {
+			return err
+		}
 	}
 
 	fmt.Println(color.CyanString("PRD Overview"))
-	table.Render()
+	return table.Render()
 }
 
 // Utility functions

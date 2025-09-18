@@ -11,7 +11,7 @@ func (p *PRD) ToMarkdown() string {
 
 	// Header
 	md.WriteString(fmt.Sprintf("# %s\n\n", p.Title))
-	
+
 	// Metadata table
 	md.WriteString("| Field | Value |\n")
 	md.WriteString("|-------|-------|\n")
@@ -55,15 +55,15 @@ func (p *PRD) ToMarkdown() string {
 	md.WriteString("## Overview\n\n")
 	md.WriteString("### Problem Statement\n\n")
 	md.WriteString(fmt.Sprintf("%s\n\n", p.Overview.ProblemStatement))
-	
+
 	md.WriteString("### Solution Summary\n\n")
 	md.WriteString(fmt.Sprintf("%s\n\n", p.Overview.SolutionSummary))
-	
+
 	if p.Overview.TargetAudience != "" {
 		md.WriteString("### Target Audience\n\n")
 		md.WriteString(fmt.Sprintf("%s\n\n", p.Overview.TargetAudience))
 	}
-	
+
 	if p.Overview.MarketContext != "" {
 		md.WriteString("### Market Context\n\n")
 		md.WriteString(fmt.Sprintf("%s\n\n", p.Overview.MarketContext))
@@ -106,7 +106,7 @@ func (p *PRD) ToMarkdown() string {
 		for _, persona := range p.UserPersonas {
 			md.WriteString(fmt.Sprintf("### %s\n\n", persona.Name))
 			md.WriteString(fmt.Sprintf("%s\n\n", persona.Description))
-			
+
 			if len(persona.Goals) > 0 {
 				md.WriteString("**Goals:**\n")
 				for _, goal := range persona.Goals {
@@ -114,7 +114,7 @@ func (p *PRD) ToMarkdown() string {
 				}
 				md.WriteString("\n")
 			}
-			
+
 			if len(persona.PainPoints) > 0 {
 				md.WriteString("**Pain Points:**\n")
 				for _, pain := range persona.PainPoints {
@@ -131,7 +131,7 @@ func (p *PRD) ToMarkdown() string {
 		for _, story := range p.UserStories {
 			md.WriteString(fmt.Sprintf("### %s\n\n", story.ID))
 			md.WriteString(fmt.Sprintf("**Story:** %s\n\n", story.Story))
-			
+
 			if len(story.AcceptanceCriteria) > 0 {
 				md.WriteString("**Acceptance Criteria:**\n")
 				for _, criteria := range story.AcceptanceCriteria {
@@ -139,7 +139,7 @@ func (p *PRD) ToMarkdown() string {
 				}
 				md.WriteString("\n")
 			}
-			
+
 			if story.Priority != "" {
 				md.WriteString(fmt.Sprintf("**Priority:** %s\n", story.Priority))
 			}
@@ -156,11 +156,11 @@ func (p *PRD) ToMarkdown() string {
 	for _, req := range p.Requirements.Functional {
 		md.WriteString(fmt.Sprintf("#### %s\n\n", req.ID))
 		md.WriteString(fmt.Sprintf("%s\n\n", req.Description))
-		
+
 		if req.Priority != "" {
 			md.WriteString(fmt.Sprintf("**Priority:** %s\n", req.Priority))
 		}
-		
+
 		if len(req.Dependencies) > 0 {
 			md.WriteString("**Dependencies:**\n")
 			for _, dep := range req.Dependencies {
@@ -175,7 +175,7 @@ func (p *PRD) ToMarkdown() string {
 		for _, req := range p.Requirements.NonFunctional {
 			md.WriteString(fmt.Sprintf("#### %s (%s)\n\n", req.ID, req.Category))
 			md.WriteString(fmt.Sprintf("%s\n\n", req.Description))
-			
+
 			if req.AcceptanceCriteria != "" {
 				md.WriteString(fmt.Sprintf("**Acceptance Criteria:** %s\n\n", req.AcceptanceCriteria))
 			}
@@ -185,16 +185,16 @@ func (p *PRD) ToMarkdown() string {
 	// Technical Specifications
 	if p.TechnicalSpecifications != nil {
 		md.WriteString("## Technical Specifications\n\n")
-		
+
 		if p.TechnicalSpecifications.ArchitectureOverview != "" {
 			md.WriteString("### Architecture Overview\n\n")
 			md.WriteString(fmt.Sprintf("%s\n\n", p.TechnicalSpecifications.ArchitectureOverview))
 		}
-		
+
 		if p.TechnicalSpecifications.TechnologyStack != nil {
 			md.WriteString("### Technology Stack\n\n")
 			stack := p.TechnicalSpecifications.TechnologyStack
-			
+
 			if len(stack.Frontend) > 0 {
 				md.WriteString("**Frontend:**\n")
 				for _, tech := range stack.Frontend {
@@ -202,7 +202,7 @@ func (p *PRD) ToMarkdown() string {
 				}
 				md.WriteString("\n")
 			}
-			
+
 			if len(stack.Backend) > 0 {
 				md.WriteString("**Backend:**\n")
 				for _, tech := range stack.Backend {
@@ -210,7 +210,7 @@ func (p *PRD) ToMarkdown() string {
 				}
 				md.WriteString("\n")
 			}
-			
+
 			if len(stack.Database) > 0 {
 				md.WriteString("**Database:**\n")
 				for _, tech := range stack.Database {
@@ -218,7 +218,7 @@ func (p *PRD) ToMarkdown() string {
 				}
 				md.WriteString("\n")
 			}
-			
+
 			if len(stack.Infrastructure) > 0 {
 				md.WriteString("**Infrastructure:**\n")
 				for _, tech := range stack.Infrastructure {
@@ -227,7 +227,7 @@ func (p *PRD) ToMarkdown() string {
 				md.WriteString("\n")
 			}
 		}
-		
+
 		if len(p.TechnicalSpecifications.APISpecifications) > 0 {
 			md.WriteString("### API Specifications\n\n")
 			for _, api := range p.TechnicalSpecifications.APISpecifications {
@@ -246,7 +246,7 @@ func (p *PRD) ToMarkdown() string {
 				md.WriteString("\n")
 			}
 		}
-		
+
 		if len(p.TechnicalSpecifications.SecurityConsiderations) > 0 {
 			md.WriteString("### Security Considerations\n\n")
 			for _, consideration := range p.TechnicalSpecifications.SecurityConsiderations {
@@ -259,7 +259,7 @@ func (p *PRD) ToMarkdown() string {
 	// Timeline
 	if p.Timeline != nil {
 		md.WriteString("## Timeline\n\n")
-		
+
 		if len(p.Timeline.Milestones) > 0 {
 			md.WriteString("### Milestones\n\n")
 			for _, milestone := range p.Timeline.Milestones {
@@ -268,7 +268,7 @@ func (p *PRD) ToMarkdown() string {
 					md.WriteString(fmt.Sprintf("%s\n\n", milestone.Description))
 				}
 				md.WriteString(fmt.Sprintf("**Target Date:** %s\n", milestone.TargetDate))
-				
+
 				if len(milestone.Dependencies) > 0 {
 					md.WriteString("**Dependencies:**\n")
 					for _, dep := range milestone.Dependencies {
@@ -278,7 +278,7 @@ func (p *PRD) ToMarkdown() string {
 				md.WriteString("\n")
 			}
 		}
-		
+
 		if p.Timeline.LaunchDate != "" {
 			md.WriteString(fmt.Sprintf("### Launch Date: %s\n\n", p.Timeline.LaunchDate))
 		}
@@ -287,18 +287,18 @@ func (p *PRD) ToMarkdown() string {
 	// Risks and Assumptions
 	if p.RisksAndAssumptions != nil {
 		md.WriteString("## Risks and Assumptions\n\n")
-		
+
 		if len(p.RisksAndAssumptions.Risks) > 0 {
 			md.WriteString("### Risks\n\n")
 			md.WriteString("| Risk | Impact | Probability | Mitigation Strategy |\n")
 			md.WriteString("|------|--------|-------------|--------------------|\n")
 			for _, risk := range p.RisksAndAssumptions.Risks {
-				md.WriteString(fmt.Sprintf("| %s | %s | %s | %s |\n", 
+				md.WriteString(fmt.Sprintf("| %s | %s | %s | %s |\n",
 					risk.Description, risk.Impact, risk.Probability, risk.MitigationStrategy))
 			}
 			md.WriteString("\n")
 		}
-		
+
 		if len(p.RisksAndAssumptions.Assumptions) > 0 {
 			md.WriteString("### Assumptions\n\n")
 			for _, assumption := range p.RisksAndAssumptions.Assumptions {
@@ -320,12 +320,12 @@ func (p *PRD) ToMarkdown() string {
 	// Appendices
 	if p.Appendices != nil {
 		md.WriteString("## Appendices\n\n")
-		
+
 		if p.Appendices.ResearchData != "" {
 			md.WriteString("### Research Data\n\n")
 			md.WriteString(fmt.Sprintf("%s\n\n", p.Appendices.ResearchData))
 		}
-		
+
 		if len(p.Appendices.MockupsWireframes) > 0 {
 			md.WriteString("### Mockups and Wireframes\n\n")
 			for _, mockup := range p.Appendices.MockupsWireframes {
@@ -340,7 +340,7 @@ func (p *PRD) ToMarkdown() string {
 				}
 			}
 		}
-		
+
 		if len(p.Appendices.RelatedDocuments) > 0 {
 			md.WriteString("### Related Documents\n\n")
 			for _, doc := range p.Appendices.RelatedDocuments {

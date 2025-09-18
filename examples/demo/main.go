@@ -1,7 +1,5 @@
 package main
 
-/*
-
 import (
 	"fmt"
 	"os"
@@ -277,4 +275,3 @@ func displayPRDSummary(prdDoc *prd.PRD) {
 		fmt.Printf("• Key Assumptions: %d\n", len(prdDoc.RisksAndAssumptions.Assumptions))
 	}
 }
-*/
