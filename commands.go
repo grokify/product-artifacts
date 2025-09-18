@@ -211,8 +211,7 @@ func listPRDs(dir string) error {
 	}
 
 	table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader([]string{"File", "ID", "Title", "Status", "Owner", "Last Updated"})
-	table.SetRowLine(true)
+	table.Header("File", "ID", "Title", "Status", "Owner", "Last Updated")
 
 	for _, file := range files {
 		prdDoc, err := prd.LoadFromFile(file)

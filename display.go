@@ -310,10 +310,7 @@ func displayRequirementsTable(prdDoc *prd.PRD) {
 	}
 
 	table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader([]string{"ID", "Description", "Priority", "Dependencies"})
-	table.SetRowLine(true)
-	table.SetAutoWrapText(false)
-	table.SetColWidth(50)
+	table.Header("ID", "Description", "Priority", "Dependencies")
 
 	for _, req := range prdDoc.Requirements.Functional {
 		deps := strings.Join(req.Dependencies, ", ")
@@ -340,10 +337,7 @@ func displayUserStoriesTable(prdDoc *prd.PRD) {
 	}
 
 	table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader([]string{"ID", "Story", "Priority", "Estimate"})
-	table.SetRowLine(true)
-	table.SetAutoWrapText(false)
-	table.SetColWidth(40)
+	table.Header("ID", "Story", "Priority", "Estimate")
 
 	for _, story := range prdDoc.UserStories {
 		table.Append([]string{
@@ -365,10 +359,7 @@ func displayMilestonesTable(prdDoc *prd.PRD) {
 	}
 
 	table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader([]string{"Name", "Target Date", "Description", "Dependencies"})
-	table.SetRowLine(true)
-	table.SetAutoWrapText(false)
-	table.SetColWidth(30)
+	table.Header("Name", "Target Date", "Description", "Dependencies")
 
 	for _, milestone := range prdDoc.Timeline.Milestones {
 		deps := strings.Join(milestone.Dependencies, ", ")
@@ -390,10 +381,7 @@ func displayMilestonesTable(prdDoc *prd.PRD) {
 
 func displayOverviewTable(prdDoc *prd.PRD) {
 	table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader([]string{"Field", "Value"})
-	table.SetRowLine(true)
-	table.SetAutoWrapText(false)
-	table.SetColWidth(50)
+	table.Header("Field", "Value")
 
 	table.Append([]string{"ID", prdDoc.ID})
 	table.Append([]string{"Title", prdDoc.Title})
