@@ -26,6 +26,7 @@ PRD Manager transforms the tedious process of creating and maintaining Product R
 - **Multiple View Formats** - Pretty print, JSON, and table views
 - **Advanced Editing** - Section-specific interactive editing
 - **Export Options** - Markdown and HTML export formats
+- **Markdown Conversion** - Built-in ToMarkdown() method for programmatic conversion
 - **File Management** - List, search, and organize PRD documents
 
 ### 📋 PRD Schema Support
@@ -126,6 +127,9 @@ This will create a complete "Smart Task Management Feature" PRD showcasing all c
 
 # Export to HTML
 ./prd-manager export my-prd.json --format html --output report.html
+
+# Convert PRD to Markdown programmatically
+go run -c "prd, _ := prd.LoadFromFile(\"my-prd.json\"); fmt.Print(prd.ToMarkdown())"
 ```
 
 ## Command Reference
@@ -316,6 +320,7 @@ product-management-artifacts/
 ├── 📖 README.md            # This documentation
 └── 📋 prd/                 # PRD package
     ├── 🏗️ prd.go           # Core PRD structs and methods
+    ├── 📝 markdown.go      # Markdown conversion functionality
     ├── 📐 schema.json      # JSON schema definition
     ├── 📄 example.json     # Complete PRD example
     └── 🧪 example_test.go  # Comprehensive test suite
