@@ -1,0 +1,493 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/grokify/product-management-artifacts/prd/schema.json",
+  "title": "Product Requirements Document (PRD)",
+  "description": "A structured schema for Product Requirements Documents",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "version",
+    "created_date",
+    "owner",
+    "status",
+    "overview",
+    "objectives",
+    "requirements"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the PRD"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the product or feature"
+    },
+    "version": {
+      "type": "string",
+      "description": "Version of the PRD document",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when the PRD was created"
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the PRD was last updated"
+    },
+    "owner": {
+      "type": "object",
+      "required": ["name", "email"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the product owner"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Email of the product owner"
+        },
+        "team": {
+          "type": "string",
+          "description": "Team or department of the product owner"
+        }
+      }
+    },
+    "stakeholders": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "role"],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "role": {
+            "type": "string",
+            "enum": ["stakeholder", "reviewer", "approver", "contributor"]
+          },
+          "team": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "review", "approved", "in_development", "completed", "archived"],
+      "description": "Current status of the PRD"
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["critical", "high", "medium", "low"],
+      "description": "Priority level of the product or feature"
+    },
+    "overview": {
+      "type": "object",
+      "required": ["problem_statement", "solution_summary"],
+      "properties": {
+        "problem_statement": {
+          "type": "string",
+          "description": "Clear description of the problem being solved"
+        },
+        "solution_summary": {
+          "type": "string",
+          "description": "High-level summary of the proposed solution"
+        },
+        "target_audience": {
+          "type": "string",
+          "description": "Description of the target users or customers"
+        },
+        "market_context": {
+          "type": "string",
+          "description": "Market context and competitive landscape"
+        }
+      }
+    },
+    "objectives": {
+      "type": "object",
+      "required": ["business_goals"],
+      "properties": {
+        "business_goals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of business objectives this product/feature aims to achieve"
+        },
+        "success_metrics": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["metric", "target"],
+            "properties": {
+              "metric": {
+                "type": "string",
+                "description": "Name of the success metric"
+              },
+              "target": {
+                "type": "string",
+                "description": "Target value or goal for the metric"
+              },
+              "measurement_method": {
+                "type": "string",
+                "description": "How the metric will be measured"
+              }
+            }
+          }
+        },
+        "okrs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["objective", "key_results"],
+            "properties": {
+              "objective": {
+                "type": "string",
+                "description": "The objective statement"
+              },
+              "key_results": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "List of key results for this objective"
+              }
+            }
+          }
+        }
+      }
+    },
+    "user_personas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "description"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the user persona"
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed description of the user persona"
+          },
+          "goals": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Goals and motivations of this persona"
+          },
+          "pain_points": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Pain points and challenges faced by this persona"
+          }
+        }
+      }
+    },
+    "user_stories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "story", "acceptance_criteria"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the user story"
+          },
+          "story": {
+            "type": "string",
+            "description": "User story in the format 'As a [user], I want [goal] so that [benefit]'"
+          },
+          "acceptance_criteria": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of acceptance criteria for this user story"
+          },
+          "priority": {
+            "type": "string",
+            "enum": ["must_have", "should_have", "could_have", "wont_have"]
+          },
+          "effort_estimate": {
+            "type": "string",
+            "description": "Effort estimation (e.g., story points, hours, etc.)"
+          }
+        }
+      }
+    },
+    "requirements": {
+      "type": "object",
+      "required": ["functional"],
+      "properties": {
+        "functional": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "description"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier for the functional requirement"
+              },
+              "description": {
+                "type": "string",
+                "description": "Detailed description of the functional requirement"
+              },
+              "priority": {
+                "type": "string",
+                "enum": ["must_have", "should_have", "could_have", "wont_have"]
+              },
+              "dependencies": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "List of requirement IDs this requirement depends on"
+              }
+            }
+          }
+        },
+        "non_functional": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "category", "description"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier for the non-functional requirement"
+              },
+              "category": {
+                "type": "string",
+                "enum": ["performance", "security", "usability", "reliability", "scalability", "maintainability", "compliance"],
+                "description": "Category of the non-functional requirement"
+              },
+              "description": {
+                "type": "string",
+                "description": "Detailed description of the non-functional requirement"
+              },
+              "acceptance_criteria": {
+                "type": "string",
+                "description": "Specific criteria for meeting this requirement"
+              }
+            }
+          }
+        }
+      }
+    },
+    "technical_specifications": {
+      "type": "object",
+      "properties": {
+        "architecture_overview": {
+          "type": "string",
+          "description": "High-level technical architecture description"
+        },
+        "technology_stack": {
+          "type": "object",
+          "properties": {
+            "frontend": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "backend": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "database": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "infrastructure": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "api_specifications": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "endpoint": {
+                "type": "string"
+              },
+              "method": {
+                "type": "string",
+                "enum": ["GET", "POST", "PUT", "DELETE", "PATCH"]
+              },
+              "description": {
+                "type": "string"
+              },
+              "request_format": {
+                "type": "string"
+              },
+              "response_format": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "security_considerations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "timeline": {
+      "type": "object",
+      "properties": {
+        "milestones": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "target_date"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the milestone"
+              },
+              "description": {
+                "type": "string",
+                "description": "Description of what will be delivered at this milestone"
+              },
+              "target_date": {
+                "type": "string",
+                "format": "date",
+                "description": "Target completion date for the milestone"
+              },
+              "dependencies": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "List of milestone names this milestone depends on"
+              }
+            }
+          }
+        },
+        "launch_date": {
+          "type": "string",
+          "format": "date",
+          "description": "Target launch date"
+        }
+      }
+    },
+    "risks_and_assumptions": {
+      "type": "object",
+      "properties": {
+        "risks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["description", "impact", "probability"],
+            "properties": {
+              "description": {
+                "type": "string",
+                "description": "Description of the risk"
+              },
+              "impact": {
+                "type": "string",
+                "enum": ["low", "medium", "high", "critical"],
+                "description": "Impact level if the risk occurs"
+              },
+              "probability": {
+                "type": "string",
+                "enum": ["low", "medium", "high"],
+                "description": "Probability of the risk occurring"
+              },
+              "mitigation_strategy": {
+                "type": "string",
+                "description": "Strategy to mitigate or handle the risk"
+              }
+            }
+          }
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of assumptions made in this PRD"
+        }
+      }
+    },
+    "out_of_scope": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of items explicitly out of scope for this release"
+    },
+    "appendices": {
+      "type": "object",
+      "properties": {
+        "research_data": {
+          "type": "string",
+          "description": "Links or references to supporting research data"
+        },
+        "mockups_wireframes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "related_documents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "type": {
+                "type": "string",
+                "enum": ["design_doc", "technical_spec", "business_case", "market_research", "other"]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
